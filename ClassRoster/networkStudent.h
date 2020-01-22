@@ -1,7 +1,6 @@
 #pragma once
 #include "student.h"
-class networkStudent :
-	public student
-{
+class networkStudent : public Student {
+
 };
 

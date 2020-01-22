@@ -3,31 +3,40 @@
 
 using namespace std;
 
-class student {
+class Student {
 public:
+	static const int DAYS_TO_COMPLETE_ARRAY_SIZE = 3;
+
+protected:
+	string studentID;
+	string firstName;
+	string lastName;
+	string emailAddress;
+	int age;
+	int daysToCompleteCourses[DAYS_TO_COMPLETE_ARRAY_SIZE];
+	Degree degree;
+
+public:
+	Student();
+	Student(string studentID, string firstName, string lastName, string emailAddress, int age, int daysToCompleteCourses[]);
+
 	string getStudentID();
 	string getFirstName();
 	string getLastName();
 	string getEmailAddress();
 	int getAge();
-	[]int getDaysToCompleteCourses();
-	Degree getDegree();
+	int* getDaysToCompleteCourses();
+	virtual Degree getDegreeProgram() = 0;
 
 	void setStudentID(string studentID);
 	void setFirstName(string firstName);
 	void setLastName(string lastName);
 	void setEmailAddress(string emailAddress);
 	void setAge(int age);
-	void setDaysToCompleteCourses([]int daysToCompleteCoursesArray);
-	void setDegree(Degree degree);
+	void setDaysToCompleteCourses([]int daysToCompleteCourses);
 
-private:
-	string studentID;
-	string firstName;
-	string lastName;
-	string emailAddress;
-	int age;
-	int daysToCompleteCourses[3];
-	Degree degree;
+	virtual void print() = 0;
+
+	~Student();
 };
 
