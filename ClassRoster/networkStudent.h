@@ -1,6 +1,14 @@
 #pragma once
+#include<string>
 #include "student.h"
-class networkStudent : public Student {
+class NetworkStudent : public Student {
+public:
+	NetworkStudent();
+	NetworkStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int daysToCompleteCourses[], Degree degree);
 
+	Degree getDegreeProgram();
+	void print();
+
+	~NetworkStudent();
 };
 
