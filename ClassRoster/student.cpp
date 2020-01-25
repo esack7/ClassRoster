@@ -75,7 +75,12 @@ void Student::setDaysToCompleteCourses([]int daysToCompleteCourses) {
 }
 
 void Student::print() {
-	cout << "To implement print() in student.cpp" << endl;
+	cout << left << setw(15) << setStudentID;
+	cout << left << setw(15) << firstName;
+	cout << left << setw(15) << lastName;
+	cout << left << setw(30) << emailAddress;
+	cout << left << setw(05) << age;
+	cout << left << setw(15) << degree;
 }
 
 Student::~Student() {
