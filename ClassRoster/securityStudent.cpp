@@ -4,21 +4,21 @@
 using namespace std;
 
 SecurityStudent::SecurityStudent() :Student() {
-	degree = NETWORKING;
+	degree = SECURITY;
 }
 
 SecurityStudent::SecurityStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int daysToCompleteCourses[], Degree degree)
 	: Student(studentID, firstName, lastName, emailAddress, age, daysToCompleteCourses) {
-	degree = NETWORKING;
+	degree = SECURITY;
 }
 
 Degree SecurityStudent::getDegreeProgram() {
-	return NETWORKING;
+	return SECURITY;
 }
 
 void SecurityStudent::print() {
 	this->Student::print();
-	cout << "Needs implemented for SecurityStudent" << "\n";
+	cout << "Degree Program: " << degreeStrings[SECURITY] << endl;
 }
 
 SecurityStudent::~SecurityStudent() {

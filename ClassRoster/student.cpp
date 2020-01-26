@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include "student.h";
+#include "student.h"
 
 Student::Student() {
 	this->studentID = "";
@@ -68,19 +68,21 @@ void Student::setAge(int age) {
 	this->age = age;
 }
 
+/* 
 void Student::setDaysToCompleteCourses([]int daysToCompleteCourses) {
 	for (int i = 0; i < DAYS_TO_COMPLETE_ARRAY_SIZE; ++i) {
 		this->daysToCompleteCourses[i] = daysToCompleteCourses;
 	}
 }
+*/
 
 void Student::print() {
-	cout << left << setw(15) << setStudentID;
-	cout << left << setw(15) << firstName;
-	cout << left << setw(15) << lastName;
-	cout << left << setw(30) << emailAddress;
-	cout << left << setw(05) << age;
-	cout << left << setw(15) << degree;
+	int* daysToCompleteArray = getDaysToCompleteCourses();
+	cout << getStudentID() << "\t";
+	cout << "First Name: " << getFirstName() << "\t";
+	cout << "Last Name: " << getLastName() << "\t";
+	cout << "Age: " << getAge() << "\t";
+	cout << "daysInCourse: {" << daysToCompleteArray[0] << ", " << daysToCompleteArray[1] << ", " << daysToCompleteArray[2] << "} ";
 }
 
 Student::~Student() {

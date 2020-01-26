@@ -18,7 +18,7 @@ Degree NetworkStudent::getDegreeProgram() {
 
 void NetworkStudent::print() {
 	this->Student::print();
-	cout << "Needs implemented for NetworkStudent" << "\n";
+	cout << "Degree Program: "<< degreeStrings[NETWORKING] << endl;
 }
 
 NetworkStudent::~NetworkStudent() {
