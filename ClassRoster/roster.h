@@ -11,7 +11,6 @@ private:
 	int capacity;
 	Student** classRosterArray;
 
-
 public:
 	Roster();
 	Roster(int capacity);
