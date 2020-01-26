@@ -77,7 +77,12 @@ void Student::setDaysToCompleteCourses([]int daysToCompleteCourses) {
 */
 
 void Student::print() {
-	cout << "Print in student.cpp needs implemented" << endl;
+	int* daysToCompleteArray = getDaysToCompleteCourses();
+	cout << getStudentID() << "\t";
+	cout << "First Name: " << getFirstName() << "\t";
+	cout << "Last Name: " << getLastName() << "\t";
+	cout << "Age: " << getAge() << "\t";
+	cout << "daysInCourse: {" << daysToCompleteArray[0] << ", " << daysToCompleteArray[1] << ", " << daysToCompleteArray[2] << "} ";
 }
 
 Student::~Student() {
