@@ -14,8 +14,6 @@ struct StudentRow {
 	Degree degree;
 };
 
-// const string studentProperties[] = { "studentID", "firstName", "lastName", "emailAddress", "age", "", "" };
-
 Roster::Roster() {
 	this->capacity = 0;
 	this->lastIndex = -1;
@@ -57,26 +55,18 @@ void Roster::parseThenAdd(string row) {
 		start = end + 1;
 		end = row.find(",", start);
 
-		if (atoi(row.substr(start, end - start).c_str()) == 0) {
-			rowData.daysInCourse1 = 0;
-			rowData.daysInCourse2 = 0;
-			rowData.daysInCourse3 = 0;
-			start = end + 1;
-			end = rowLength;
-		}
-		else {
-			rowData.daysInCourse1 = atoi(row.substr(start, end - start).c_str());
-			start = end + 1;
-			end = row.find(",", start);
+		rowData.daysInCourse1 = atoi(row.substr(start, end - start).c_str());
+		start = end + 1;
+		end = row.find(",", start);
 
-			rowData.daysInCourse2 = atoi(row.substr(start, end - start).c_str());
-			start = end + 1;
-			end = row.find(",", start);
+		rowData.daysInCourse2 = atoi(row.substr(start, end - start).c_str());
+		start = end + 1;
+		end = row.find(",", start);
 
-			rowData.daysInCourse3 = atoi(row.substr(start, end - start).c_str());
-			start = end + 1;
-			end = rowLength;
-		}
+		rowData.daysInCourse3 = atoi(row.substr(start, end - start).c_str());
+		start = end + 1;
+		end = rowLength;
+
 		final = row.substr(start, end - start);
 		if (final == "SECURITY") {
 			rowData.degree = SECURITY;
@@ -116,6 +106,12 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 	}
 }
 
+void Roster::printAll() {
+	for (int i = 0; i <= this->lastIndex; ++i) {
+		(this->classRosterArray)[i]->print();
+	}
+}
+
 int main()
 {
 	int numStudents = 5;
@@ -124,7 +120,7 @@ int main()
 		"A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
 		"A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
 		"A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-		"A5,[firstname],[lastname],[emailaddress],[age],[numberofdaystocomplete3courses],SOFTWARE"
+		"A5,Isaac,Heist,iheist@wgu.edu,38,12,60,45,SOFTWARE"
 	};
 
 	Roster* roster = new Roster(numStudents);
@@ -132,6 +128,13 @@ int main()
 	for (int i = 0; i < numStudents; ++i) {
 		roster->parseThenAdd(studentData[i]);
 	}
+
+	cout << "Course Title:\t\tSCRIPTING AND PROGRAMMING APPLICATIONS - C867" << endl;
+	cout << "Programming Language:\tC++" << endl;
+	cout << "Student ID:\t\t001101302" << endl;
+	cout << "Student Name:\t\tIsaac Heist\n"<< endl;
+
+	roster->printAll();
 
 }
 
