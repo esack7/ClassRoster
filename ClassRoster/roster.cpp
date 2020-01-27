@@ -108,7 +108,8 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 
 void Roster::remove(string studentID) {
 	bool notFound = true;
-	for (int i = 0; i < this->lastIndex; ++i) {
+	
+	for (int i = 0; i <= this->lastIndex; ++i) {
 		if (classRosterArray[i]->getStudentID() == studentID) {
 			notFound = false;
 			delete classRosterArray[i];
@@ -127,6 +128,19 @@ void Roster::printAll() {
 		(this->classRosterArray)[i]->print();
 	}
 	cout << endl;
+}
+
+void Roster::printDaysInCourse(string studentID) {
+	int averageDays = 0;
+	int* days = nullptr;
+
+	for (int i = 0; i <= this->lastIndex; ++i) {
+		if (classRosterArray[i]->getStudentID() == studentID) {
+			days = classRosterArray[i]->getDaysToCompleteCourses();
+			averageDays = (days[0] + days[1] + days[2]) / 3;
+			cout << "Average days for studentID " << studentID << ": " << averageDays << "\n" << endl;
+		}
+	}
 }
 
 int main()
@@ -154,9 +168,8 @@ int main()
 	roster->printAll();
 
 	roster->remove("A6");
-	roster->remove("A1");
 
-	roster->printAll();
+	roster->printDaysInCourse("A5");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
