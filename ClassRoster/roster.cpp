@@ -106,10 +106,27 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 	}
 }
 
+void Roster::remove(string studentID) {
+	bool notFound = true;
+	for (int i = 0; i < this->lastIndex; ++i) {
+		if (classRosterArray[i]->getStudentID() == studentID) {
+			notFound = false;
+			delete classRosterArray[i];
+			classRosterArray[i] = classRosterArray[lastIndex];
+			--lastIndex;
+		}
+	}
+
+	if (notFound) {
+		cerr << "Student ID " << studentID << " was not found to remove!\n" << endl;
+	}
+}
+
 void Roster::printAll() {
 	for (int i = 0; i <= this->lastIndex; ++i) {
 		(this->classRosterArray)[i]->print();
 	}
+	cout << endl;
 }
 
 int main()
@@ -136,6 +153,10 @@ int main()
 
 	roster->printAll();
 
+	roster->remove("A6");
+	roster->remove("A1");
+
+	roster->printAll();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
