@@ -167,6 +167,14 @@ void Roster::printByDegreeProgram(int degreeProgram) {
 	}
 }
 
+Roster::~Roster() {
+	for (int i = 0; i <= this->lastIndex; ++i) {
+		delete classRosterArray[i];
+	}
+	
+	delete classRosterArray;
+}
+
 int main()
 {
 	int numStudents = 5;
@@ -193,7 +201,3 @@ int main()
 
 
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
