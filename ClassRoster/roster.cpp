@@ -159,6 +159,14 @@ void Roster::printInvalidEmails() {
 	}
 }
 
+void Roster::printByDegreeProgram(int degreeProgram) {
+	for (int i = 0; i <= this->lastIndex; ++i) {
+		if (classRosterArray[i]->getDegreeProgram() == degreeProgram) {
+			classRosterArray[i]->print();
+		}
+	}
+}
+
 int main()
 {
 	int numStudents = 5;
@@ -181,11 +189,9 @@ int main()
 	cout << "Student ID:\t\t001101302" << endl;
 	cout << "Student Name:\t\tIsaac Heist\n"<< endl;
 
-	roster->printAll();
+	roster->printByDegreeProgram(SOFTWARE);
 
-	roster->printDaysInCourse("A1");
 
-	roster->printInvalidEmails();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
