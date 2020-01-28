@@ -139,6 +139,22 @@ void Roster::printDaysInCourse(string studentID) {
 			days = classRosterArray[i]->getDaysToCompleteCourses();
 			averageDays = (days[0] + days[1] + days[2]) / 3;
 			cout << "Average days for studentID " << studentID << ": " << averageDays << "\n" << endl;
+			break;
+		}
+	}
+}
+
+void Roster::printInvalidEmails() {
+	string email = "";
+	cout << "The following emails are invalid:" << endl;
+	for (int i = 0; i <= this->lastIndex; ++i) {
+		email = classRosterArray[i]->getEmailAddress();
+		bool missingAtSign = email.find('@') == -1;
+		bool missingPeriod = email.find('.') == -1;
+		bool hasSpace = email.find(' ') != -1;
+
+		if (missingAtSign || missingPeriod || hasSpace) {
+			cout << email << endl;
 		}
 	}
 }
@@ -167,9 +183,9 @@ int main()
 
 	roster->printAll();
 
-	roster->remove("A6");
+	roster->printDaysInCourse("A1");
 
-	roster->printDaysInCourse("A5");
+	roster->printInvalidEmails();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
