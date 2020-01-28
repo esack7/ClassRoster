@@ -2,18 +2,6 @@
 #include <cstdlib>
 #include "roster.h"
 
-struct StudentRow {
-	string studentID;
-	string firstName;
-	string lastName;
-	string emailAddress;
-	int age;
-	int daysInCourse1;
-	int daysInCourse2;
-	int daysInCourse3;
-	Degree degree;
-};
-
 Roster::Roster() {
 	this->capacity = 0;
 	this->lastIndex = -1;
@@ -26,7 +14,7 @@ Roster::Roster(int capacity) {
 	this->classRosterArray = new Student*[capacity];
 }
 
-void Roster::parseThenAdd(string row) {
+StudentRow Roster::parseStudentString(string row) {
 	if (lastIndex < capacity) {
 		++lastIndex;
 		StudentRow rowData;
@@ -80,8 +68,7 @@ void Roster::parseThenAdd(string row) {
 		else {
 			rowData.degree = SOFTWARE;
 		}
-
-		add(rowData.studentID, rowData.firstName, rowData.lastName, rowData.emailAddress, rowData.age, rowData.daysInCourse1, rowData.daysInCourse2, rowData.daysInCourse3, rowData.degree);
+		return rowData;
 	}
 	else {
 		cerr << "ERROR! EXCEEDED MAXIMUM CAPACITY!\nEXITING NOW!";
@@ -121,6 +108,9 @@ void Roster::remove(string studentID) {
 	if (notFound) {
 		cerr << "Student ID " << studentID << " was not found to remove!\n" << endl;
 	}
+	else {
+		cout << "Student ID " << studentID << " was removed." << endl;
+	}
 }
 
 void Roster::printAll() {
@@ -138,7 +128,7 @@ void Roster::printDaysInCourse(string studentID) {
 		if (classRosterArray[i]->getStudentID() == studentID) {
 			days = classRosterArray[i]->getDaysToCompleteCourses();
 			averageDays = (days[0] + days[1] + days[2]) / 3;
-			cout << "Average days for studentID " << studentID << ": " << averageDays << "\n" << endl;
+			cout << "Average days for studentID " << studentID << ": " << averageDays << endl;
 			break;
 		}
 	}
@@ -157,6 +147,7 @@ void Roster::printInvalidEmails() {
 			cout << email << endl;
 		}
 	}
+	cout << endl;
 }
 
 void Roster::printByDegreeProgram(int degreeProgram) {
@@ -165,6 +156,11 @@ void Roster::printByDegreeProgram(int degreeProgram) {
 			classRosterArray[i]->print();
 		}
 	}
+	cout << endl;
+}
+
+string Roster::getStudentID(int i) {
+	return classRosterArray[i]->getStudentID();
 }
 
 Roster::~Roster() {
@@ -173,6 +169,7 @@ Roster::~Roster() {
 	}
 	
 	delete classRosterArray;
+	cout << "The program has ended and the destructor has been called!" << endl;
 }
 
 int main()
@@ -186,10 +183,21 @@ int main()
 		"A5,Isaac,Heist,iheist@wgu.edu,38,12,60,45,SOFTWARE"
 	};
 
-	Roster* roster = new Roster(numStudents);
+	Roster* classRoster = new Roster(numStudents);
 
 	for (int i = 0; i < numStudents; ++i) {
-		roster->parseThenAdd(studentData[i]);
+		StudentRow rowData = classRoster->parseStudentString(studentData[i]);
+		classRoster->add(
+			rowData.studentID, 
+			rowData.firstName, 
+			rowData.lastName, 
+			rowData.emailAddress, 
+			rowData.age, 
+			rowData.daysInCourse1, 
+			rowData.daysInCourse2, 
+			rowData.daysInCourse3, 
+			rowData.degree
+		);
 	}
 
 	cout << "Course Title:\t\tSCRIPTING AND PROGRAMMING APPLICATIONS - C867" << endl;
@@ -197,7 +205,19 @@ int main()
 	cout << "Student ID:\t\t001101302" << endl;
 	cout << "Student Name:\t\tIsaac Heist\n"<< endl;
 
-	roster->printByDegreeProgram(SOFTWARE);
+	classRoster->printAll();
+	classRoster->printInvalidEmails();
 
+	for (int i = 0; i < numStudents; ++i) {
+		string sID = classRoster->getStudentID(i);
+		classRoster->printDaysInCourse(sID);
+	}
+	cout << endl;
 
+	classRoster->printByDegreeProgram(SOFTWARE);
+
+	classRoster->remove("A3");
+	classRoster->remove("A3");
+
+	classRoster->~Roster();
 }
