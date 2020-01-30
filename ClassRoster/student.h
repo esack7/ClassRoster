@@ -34,7 +34,6 @@ public:
 	void setLastName(string lastName);
 	void setEmailAddress(string emailAddress);
 	void setAge(int age);
-	//void setDaysToCompleteCourses([]int daysToCompleteCourses);
 
 	virtual void print() = 0;
 
