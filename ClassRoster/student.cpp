@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-#include <iomanip>
 #include "student.h"
 
 Student::Student() {
@@ -67,14 +66,6 @@ void Student::setEmailAddress(string emailAddress) {
 void Student::setAge(int age) {
 	this->age = age;
 }
-
-/* 
-void Student::setDaysToCompleteCourses([]int daysToCompleteCourses) {
-	for (int i = 0; i < DAYS_TO_COMPLETE_ARRAY_SIZE; ++i) {
-		this->daysToCompleteCourses[i] = daysToCompleteCourses;
-	}
-}
-*/
 
 void Student::print() {
 	int* daysToCompleteArray = getDaysToCompleteCourses();
